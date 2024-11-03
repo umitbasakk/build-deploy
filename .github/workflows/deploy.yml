@@ -22,3 +22,10 @@ jobs:
       run: | 
         docker tag my-app:latest  "${{secrets.DOCKER_USERNAME}}"/my-app:latest
         docker push "${{secrets.DOCKER_USERNAME}}"/my-app:latest
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Docker pull image
+      run: docker image pull "${{secrets.DOCKER_USERNAME}}"/my-app:latest
+    - name: Docker run image
+      run: docker run "${{secrets.DOCKER_USERNAME}}"/my-app:latest
