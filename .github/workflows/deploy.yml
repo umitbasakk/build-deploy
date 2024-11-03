@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+        version: ${{ env.RELEASE_VERSION }}
     steps:
     - name: Check out the repo
       uses: actions/checkout@v3
@@ -30,5 +32,6 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: Docker pull image
-      run: echo ${{ env.RELEASE_VERSION }}
-   
+      run: docker image pull "${{secrets.DOCKER_USERNAME}}"/my-app:${{ needs.build.outputs.version }}
+    - name: Docker run image
+      run: docker run "${{secrets.DOCKER_USERNAME}}"/my-app:${{ needs.build.outputs.version }}
