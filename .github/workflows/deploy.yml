@@ -32,6 +32,6 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: Docker pull image
-      run: docker image pull "${{secrets.DOCKER_USERNAME}}"/my-app:${{ needs.build.outputs.version }}
+      run: docker image pull "${{secrets.DOCKER_USERNAME}}"/my-app:${{needs.build.outputs.version}}
     - name: Docker run image
-      run: docker run "${{secrets.DOCKER_USERNAME}}"/my-app:${{ needs.build.outputs.version }}
+      run: docker run "${{secrets.DOCKER_USERNAME}}"/my-app:${{needs.build.outputs.version}}
